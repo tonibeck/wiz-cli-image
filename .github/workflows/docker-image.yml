@@ -15,16 +15,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $(IMAGE_NAME):$(date +%s)
+      run: docker build . --file Dockerfile --tag ${{ vars.IMAGE_NAME }}:$(date +%s)
 
     - name: Download Wiz-cli
       run: curl -o wizcli https://wizcli.app.wiz.io/latest/wizcli && chmod +x wizcli
 
     - name: Authenticate to Wiz
-      run: ./wizcli auth --id "$WIZ_CLIENT_ID" --secret "$WIZ_CLIENT_SECRET"
+      run: ./wizcli auth --id ${{ secrets.WIZ_CLIENT_ID }} --secret ${{ secrets.WIZ_CLIENT_SECRET }}
       # env:
       #   WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
       #   WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
 
     - name: Run wiz-cli docker image scan
-      run: ./wizcli docker scan --image $(IMAGE_NAME):$(date +%s) --policy "$POLICY" --policy-hits-only --show-vulnerability-details
+      run: ./wizcli docker scan --image ${{ vars.IMAGE_NAME }}:$(date +%s) --policy ${{ vars.WIZCLI_POLICY_VULNS }} --policy-hits-only --show-vulnerability-details
