@@ -27,4 +27,4 @@ jobs:
       #   WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
 
     - name: Run wiz-cli docker image scan
-      run: ./wizcli docker scan --image ${{ vars.IMAGE_NAME }}:latest --policy ${{ vars.WIZCLI_POLICY_VULNS }} --policy-hits-only --show-vulnerability-details --tag ImageName=${{ vars.IMAGE_NAME }} --tag Repo=${{ vars.GITHUB_REPOSITORY }} --tag RepoOwner=${{ vars.GITHUB_REPOSITORY_OWNER }}
+      run: ./wizcli docker scan --image ${{ vars.IMAGE_NAME }}:latest --policy ${{ vars.WIZCLI_POLICY_VULNS }} --policy-hits-only --show-vulnerability-details --tag image-name=${{ vars.IMAGE_NAME }} --tag repo=${{ vars.GITHUB_REPOSITORY }} --tag repo-owner=${{ vars.GITHUB_REPOSITORY_OWNER }}
