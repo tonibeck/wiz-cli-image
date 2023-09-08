@@ -1,7 +1,3 @@
 # wiz-cli-image
 
-blah
-blah
-blah
-blah
-blah
+a friendly message
